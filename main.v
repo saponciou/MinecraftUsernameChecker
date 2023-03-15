@@ -3,9 +3,11 @@ module main
 import net.http
 import time
 import rand
+import os
 
 fn main(){
 	println("\x1b[34mMade by Sap :)\x1b[0m")
+	mut names := [""]
 	for {
 		time.sleep(0.5)
 		ran_name := random_name()
@@ -14,6 +16,7 @@ fn main(){
 		if resp := http.get(url) {
 			if resp.body.contains("errorMessage") {
 				println("\x1b[32mAviable: " + ran_name.str() + "\x1b[0m")
+				os.write_file("valids.txt", ran_name.str())!
 			} else {
 				println("\x1b[31mUnaviable: " + ran_name.str() + "\x1b[0m")
 			}
